@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<!--首先要导入thymeleaf的命名空间-->
+<html lang="en" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>sidebar</title>
+</head>
+<body>
+<!--定义一个头部导航栏-->
+<!--定义一个侧边栏-->
+
+<!--侧边栏-->
+<!--加一个th:fragment="sidebar"就可以把侧边栏的代码抽出来-->
+<!--抽出来之后就相当于一个组件-->
+<!--就可以用组件把别的页面的侧边栏换掉-->
+
+<!--在sidebar的时候传递参数给main.html页面，在这里接收参数-->
+<div id="sidebar" class="sidebar py-3" th:fragment="sidebar">
+    <!-- 一旦加了th，就表示被thymeleaf接管了-->
+    <!--如果active==main.html，那么就激活，否则是一个默认的表达式-->
+    <div class="text-gray-400 text-uppercase px-3 px-lg-4 py-4 font-weight-bold small headings-font-family">MAIN</div>
+    <ul class="sidebar-menu list-unstyled">
+        <!-- 一旦加了th，就表示被thymeleaf接管了-->
+        <!--如果active==main.html，那么就激活，否则是一个默认的表达式-->
+<!--       按道理这里应该是点击home，home高亮，不点就不高亮，但是不知为何，Home一直是高亮-->
+        <li class="sidebar-list-item"><a th:href="@{/index.html}" th:class="${active=='main.html'?'sidebar-link text-muted active':'sidebar-link text-muted'}"><i class="o-home-1 mr-3 text-gray"></i><span>Home</span></a></li>
+
+        <li class="sidebar-list-item"><a th:href="@{/charts.html}" class="sidebar-link text-muted"><i class="o-sales-up-1 mr-3 text-gray"></i><span>Charts</span></a></li>
+        <!-- 想办法让点击员工管理后，自动跳到员工查询页面/tables.html-->
+        <!--只要请求/emps，就能到EmployeeController里面，到EmployeeController里面就会查询出来所有员工，并返回出来-->
+
+       <!-- 一旦加了th，就表示被thymeleaf接管了-->
+        <!--如果参数active==tables.html，那么就激活，否则是一个默认的表达式-->
+<!--        点击员工管理，员工管理就会高亮，不点击就不高亮-->
+        <li class="sidebar-list-item"><a th:href="@{/emps}" th:class="${active=='tables.html'?'sidebar-link text-muted active':'sidebar-link text-muted'}"><i class="o-table-content-1 mr-3 text-gray"></i><span>员工管理</span></a></li>
+
+        <li class="sidebar-list-item"><a th:href="@{/forms.html}" class="sidebar-link text-muted"><i class="o-survey-1 mr-3 text-gray"></i><span>Forms</span></a></li>
+        <li class="sidebar-list-item"><a href="#" data-toggle="collapse" data-target="#pages" aria-expanded="false" aria-controls="pages" class="sidebar-link text-muted"><i class="o-wireframe-1 mr-3 text-gray"></i><span>Pages</span></a>
+            <div id="pages" class="collapse">
+                <ul class="sidebar-menu list-unstyled border-left border-primary border-thick">
+                    <li class="sidebar-list-item"><a href="#" class="sidebar-link text-muted pl-lg-5">Page one</a></li>
+                    <li class="sidebar-list-item"><a href="#" class="sidebar-link text-muted pl-lg-5">Page two</a></li>
+                    <li class="sidebar-list-item"><a href="#" class="sidebar-link text-muted pl-lg-5">Page three</a></li>
+                    <li class="sidebar-list-item"><a href="#" class="sidebar-link text-muted pl-lg-5">Page four</a></li>
+                </ul>
+            </div>
+        </li>
+        <li class="sidebar-list-item"><a th:href="@{/login.html}" class="sidebar-link text-muted"><i class="o-exit-1 mr-3 text-gray"></i><span>Login</span></a></li>
+    </ul>
+    <div class="text-gray-400 text-uppercase px-3 px-lg-4 py-4 font-weight-bold small headings-font-family">EXTRAS</div>
+    <ul class="sidebar-menu list-unstyled">
+        <li class="sidebar-list-item"><a href="#" class="sidebar-link text-muted"><i class="o-database-1 mr-3 text-gray"></i><span>Demo</span></a></li>
+        <li class="sidebar-list-item"><a href="#" class="sidebar-link text-muted"><i class="o-imac-screen-1 mr-3 text-gray"></i><span>Demo</span></a></li>
+        <li class="sidebar-list-item"><a href="#" class="sidebar-link text-muted"><i class="o-paperwork-1 mr-3 text-gray"></i><span>Demo</span></a></li>
+        <li class="sidebar-list-item"><a href="#" class="sidebar-link text-muted"><i class="o-wireframe-1 mr-3 text-gray"></i><span>Demo</span></a></li>
+    </ul>
+</div>
+
+</body>
+</html>

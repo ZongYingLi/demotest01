@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<!--tables.html-->
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="all,follow">
+    <!-- Bootstrap CSS-->
+    <link rel="stylesheet" th:href="@{/vendor/bootstrap/css/bootstrap.min.css}">
+    <!-- Font Awesome CSS-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+    <!-- Google fonts - Popppins for copy-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,800">
+    <!-- orion icons-->
+    <link rel="stylesheet" th:href="@{/css/orionicons.css}">
+    <!-- theme stylesheet-->
+    <link rel="stylesheet" th:href="@{/css/style.default.css}" id="theme-stylesheet">
+    <!-- Custom stylesheet - for your changes-->
+    <link rel="stylesheet" th:href="@{/css/custom.css}">
+    <!-- Favicon-->
+    <link rel="shortcut icon" th:href="@{/img/favicon.png?3}">
+    <!-- Tweaks for older IEs--><!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
+  </head>
+  <body>
+<!-- navbar-->
+<!--header里面放的是顶部导航栏-->
+    <header class="header">
+      <nav class="navbar navbar-expand-lg px-4 py-2 bg-white shadow" ><a href="#" class="sidebar-toggler text-gray-500 mr-4 mr-lg-5 lead"><i class="fas fa-align-left"></i></a><a th:href="@{/index.html}" class="navbar-brand font-weight-bold text-uppercase text-base">Bubbly Dashboard</a>
+        <ul class="ml-auto d-flex align-items-center list-unstyled mb-0">
+          <li class="nav-item">
+            <form id="searchForm" class="ml-auto d-none d-lg-block">
+              <div class="form-group position-relative mb-0">
+                <button type="submit" style="top: -3px; left: 0;" class="position-absolute bg-white border-0 p-0"><i class="o-search-magnify-1 text-gray text-lg"></i></button>
+                <input type="search" placeholder="Search ..." class="form-control form-control-sm border-0 no-shadow pl-4">
+              </div>
+            </form>
+          </li>
+          <li class="nav-item dropdown mr-3"><a id="notifications" href="http://example.com" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle text-gray-400 px-1"><i class="fa fa-bell"></i><span class="notification-icon"></span></a>
+            <div aria-labelledby="notifications" class="dropdown-menu"><a href="#" class="dropdown-item">
+              <div class="d-flex align-items-center">
+                <div class="icon icon-sm bg-violet text-white"><i class="fab fa-twitter"></i></div>
+                <div class="text ml-2">
+                  <p class="mb-0">You have 2 followers</p>
+                </div>
+              </div></a><a href="#" class="dropdown-item">
+              <div class="d-flex align-items-center">
+                <div class="icon icon-sm bg-green text-white"><i class="fas fa-envelope"></i></div>
+                <div class="text ml-2">
+                  <p class="mb-0">You have 6 new messages</p>
+                </div>
+              </div></a><a href="#" class="dropdown-item">
+              <div class="d-flex align-items-center">
+                <div class="icon icon-sm bg-blue text-white"><i class="fas fa-upload"></i></div>
+                <div class="text ml-2">
+                  <p class="mb-0">Server rebooted</p>
+                </div>
+              </div></a><a href="#" class="dropdown-item">
+              <div class="d-flex align-items-center">
+                <div class="icon icon-sm bg-violet text-white"><i class="fab fa-twitter"></i></div>
+                <div class="text ml-2">
+                  <p class="mb-0">You have 2 followers</p>
+                </div>
+              </div></a>
+              <div class="dropdown-divider"></div><a href="#" class="dropdown-item text-center"><small class="font-weight-bold headings-font-family text-uppercase">View all notifications</small></a>
+            </div>
+          </li>
+          <li class="nav-item dropdown ml-auto"><a id="userInfo" href="http://example.com" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle"><img src="img/avatar-6.jpg" alt="Jason Doe" style="max-width: 2.5rem;" class="img-fluid rounded-circle shadow"></a>
+            <!-把名字改为session里面取出来的名字[[${session.loginUser}]]-->
+            <div aria-labelledby="userInfo" class="dropdown-menu"><a href="#" class="dropdown-item"><strong class="d-block text-uppercase headings-font-family">[[${session.loginUser}]]</strong><small>Web Developer</small></a>
+              <div class="dropdown-divider"></div><a href="#" class="dropdown-item">Settings</a><a href="#" class="dropdown-item">Activity log       </a>
+              <div class="dropdown-divider"></div><a href="login.html" class="dropdown-item">Logout</a>
+            </div>
+          </li>
+        </ul>
+      </nav>
+    </header>
+
+    <div class="d-flex align-items-stretch">
+
+      <!--侧边栏-->
+      <!--用commons.html里面提取的侧边栏把这里的侧边栏换掉,注意thymeleaf固定的格式-->
+
+      <!--传递参数给组件，使得点哪个页面哪个页面的button可以高亮-->
+      <!-- 在sidebar的时候传递参数给main.html页面-->
+      <div th:insert="~{/commons/commons::sidebar(active='main.html')}"></div>
+<!--w-50设置宽度-->
+      <div class="page-holder w-150 d-flex flex-wrap">
+<!--在bootstrap中，规定了每一行都被分为了固定的12个栅栏，每一个栅栏都有自己的宽度。
+如果你的div用了container的样式，那么它的宽度最大也大不过12个栅栏总共的最大宽度。
+当你的div用了container-fluid的样式，它会无视12个栅栏的规定，根据屏幕自动适应自动填充。-->
+        <div class="container-fluid px-xl-5">
+          <section class="py-5">
+            <div class="row">
+
+<!--              <div class="row">-->
+<!--                <div class="col-md-4">col-md-4</div>-->
+<!--                <div class="col-md-4">col-md-4</div>-->
+<!--                <div class="col-md-4">col-md-4</div>-->
+<!--                &lt;!&ndash; 说明：每row行共12列，分个3div，每个div平占4列，即3个*4列=12列 &ndash;&gt;-->
+<!--              </div>-->
+
+              <div class="col-lg-6 mb-4">
+                <div class="card">
+                  <div class="card-header">
+                    <h6 class="text-uppercase mb-0">Employee</h6>
+
+<!--                    弄一个添加按钮，使得可以添加员工信息-->
+<!--                    按钮提交--跳转到添加页面--添加员工成功--返回首页-->
+<!--                      th:href="@{/emp}发送请求到emp，然后通过EmployeeController跳转到add页面-->
+
+<!--                      这应该是一个a标签而不是button，button不能直接加href属性，里面用了boostrap的样式和访问路径th:href="@{/emp}"-->
+<!--                      btn-success 绿色-->
+                      <a class="btn btn-sm btn-success" th:href="@{/emp}">添加员工</a>
+
+                  </div>
+                  <div class="card-body">
+                    <table class="table card-text">
+                      <thead>
+<!--                      表格的样式-->
+                        <tr>
+                          <th>id</th>
+                          <th>lastName</th>
+                          <th>email</th>
+                          <th>gender</th>
+                          <th>department</th>
+                          <th>birth</th>
+                          <th>操作</th>
+                        </tr>
+                      </thead>
+
+
+                      <!--tbody里面的东西应该是遍历出来的，删掉-->
+                      <!--从emps里面取出来，给到emp，tr就有了-->
+                      <tbody>
+                      <tr th:each="emp:${emps}">
+<!--                        td就是里面的每一行-->
+<!--                        两种方法都可以用-->
+                        <td th:text="${emp.getId()}"></td>
+<!--                        <td>[[${emp.getLastName()}]]</td>-->
+                        <td th:text="${emp.getLastName()}"></td>
+                        <td th:text="${emp.getEmail()}"></td>
+                        <td th:text="${emp.getGender()==0?'女':'男'}"></td>
+                        <td th:text="${emp.department.getDepartmentName()}"></td>
+<!--                        更改birth的格式-->
+                        <td th:text="${#dates.format(emp.getBirth(),'yyyy/MM/dd HH:mm:ss')}"></td>
+                          <!-- btn-sm：小标签 btn-primary：主要的样式  删除的是危险的，应该是红色的，所以是btn-danger-->
+                          <!--通过编辑跳转到emp页面，并传过去emp.id这个参数,其中emp就是循环遍历的emp，id就是当前的id-->
+                        <td>
+<!--                            $  :取值-->
+<!--                         +${emp.getId()-->
+                          <a class="btn btn-sm btn-primary" th:href="@{/emp/}+${emp.getId()}">编辑</a>
+                          <a class="btn btn-sm btn-danger" th:href="@{/delEmp/}+${emp.getId()}">删除</a>
+                        </td>
+                      </tr>
+                     </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+        <footer class="footer bg-white shadow align-self-end py-3 px-xl-5 w-100">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-md-6 text-center text-md-left text-primary">
+                <p class="mb-2 mb-md-0">Your company &copy; 2018-2020</p>
+              </div>
+              <div class="col-md-6 text-center text-md-right text-gray-400">
+                <p class="mb-0">Copyright &copy; 2019.Company name All rights reserved.<a target="_blank" href="http://sc.chinaz.com/moban/">&#x7F51;&#x9875;&#x6A21;&#x677F;</a></p>
+                <!-- Please do not remove the backlink to us unless you support further theme's development at https://bootstrapious.com/donate. It is part of the license conditions. Thank you for understanding :)-->
+              </div>
+            </div>
+          </div>
+        </footer>
+      </div>
+    </div>
+    <!-- JavaScript files-->
+    <script src="../../static/vendor/jquery/jquery.min.js"></script>
+    <script src="../../static/vendor/popper.js/umd/popper.min.js"> </script>
+    <script src="../../static/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="../../static/vendor/jquery.cookie/jquery.cookie.js"> </script>
+    <script src="../../static/vendor/chart.js/Chart.min.js"></script>
+    <script src="../../static/js/js.cookie.min.js"></script>
+    <script src="../../static/js/front.js"></script>
+  </body>
+</html>
